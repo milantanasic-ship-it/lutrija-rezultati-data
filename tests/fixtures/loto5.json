@@ -1,0 +1,75 @@
+{
+  "Round": 73,
+  "Year": 2026,
+  "Date": "2026-09-14T00:00:00",
+  "MainNumbers": [
+    2,
+    3,
+    4,
+    19,
+    23
+  ],
+  "JokerDigits": [
+    5,
+    3,
+    6,
+    6,
+    2,
+    8
+  ],
+  "Prizes": [
+    {
+      "Category": "5 + 1 pogodaka",
+      "Winners": 0,
+      "Amount": 0
+    },
+    {
+      "Category": "5 pogodaka",
+      "Winners": 0,
+      "Amount": 0
+    },
+    {
+      "Category": "4 + 1 pogodaka",
+      "Winners": 0,
+      "Amount": 0
+    },
+    {
+      "Category": "4 pogotka",
+      "Winners": 9,
+      "Amount": 13408.33
+    },
+    {
+      "Category": "3 pogotka",
+      "Winners": 289,
+      "Amount": 500
+    },
+    {
+      "Category": "1 + 1 pogodak",
+      "Winners": 1206,
+      "Amount": 100
+    }
+  ],
+  "JokerPrizes": [
+    {
+      "Category": "Joker 6",
+      "Winners": 0,
+      "Amount": 0
+    },
+    {
+      "Category": "Joker 5",
+      "Winners": 0,
+      "Amount": 0
+    },
+    {
+      "Category": "Joker 4",
+      "Winners": 0,
+      "Amount": 0
+    }
+  ],
+  "Uplata": 2139200,
+  "Fond": 1069600,
+  "JokerUplata": 461000,
+  "JokerFond": 276600,
+  "ReportUrl": "/assets/FileResources/SlIzv/Loto5/Службени извештај за Лото 5 73. коло од 14.09.2026.pdf",
+  "Broj_Plus": 4
+}

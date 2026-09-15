@@ -1,0 +1,82 @@
+{
+  "Round": 73,
+  "Year": 2026,
+  "Date": "2026-09-11T00:00:00",
+  "LotoNumbers": [
+    4,
+    5,
+    7,
+    16,
+    19,
+    29,
+    30
+  ],
+  "LotoPlusNumbers": [
+    9,
+    12,
+    15,
+    16,
+    17,
+    25,
+    27
+  ],
+  "JokerDigits": [
+    2,
+    8,
+    0,
+    8,
+    5,
+    9
+  ],
+  "LotoPrizes": [
+    {
+      "Category": "7 pogodaka",
+      "Winners": 0,
+      "Amount": 0
+    },
+    {
+      "Category": "6 pogodaka",
+      "Winners": 6,
+      "Amount": 736803.13
+    },
+    {
+      "Category": "5 pogodaka",
+      "Winners": 367,
+      "Amount": 12045.83
+    },
+    {
+      "Category": "4 pogotka",
+      "Winners": 5574,
+      "Amount": 1500
+    },
+    {
+      "Category": "3 pogotka",
+      "Winners": 39620,
+      "Amount": 150
+    }
+  ],
+  "JokerPrizes": [
+    {
+      "Category": "Joker 6",
+      "Winners": 1,
+      "Amount": 15729900
+    },
+    {
+      "Category": "Joker 5",
+      "Winners": 1,
+      "Amount": 500000
+    },
+    {
+      "Category": "Joker 4",
+      "Winners": 13,
+      "Amount": 50000
+    }
+  ],
+  "LotoUplata": 63974550,
+  "LotoFond": 31987275,
+  "LotoPlusFond": 3116805,
+  "LotoPlusWinners": 0,
+  "JokerUplata": 3742550,
+  "JokerFond": 2245530,
+  "ReportUrl": "/assets/FileResources/SlIzv/Loto7/Службени извештај за Лото 7 73. коло од 11.09.2026.pdf"
+}

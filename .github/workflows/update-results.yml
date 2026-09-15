@@ -1,0 +1,61 @@
+name: Update lottery results
+on:
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: Check the past six months
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ['*.py', 'tests/**', '.github/workflows/update-results.yml']
+  schedule:
+    - cron: '0 22 * * *'
+      timezone: Europe/Belgrade
+permissions:
+  contents: write
+concurrency:
+  group: lottery-data-update
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify importer
+        run: python -m unittest -v
+      - name: Prepare persistent archive
+        run: python prepare_database.py
+      - name: Fetch and validate official results
+        env:
+          BACKFILL: ${{ inputs.backfill }}
+        run: |
+          for attempt in 1 2 3; do
+            if [ "$BACKFILL" = "true" ]; then
+              python scraper.py --backfill && break
+            else
+              python scraper.py && break
+            fi
+            if [ "$attempt" = 3 ]; then exit 1; fi
+            sleep 60
+          done
+      - name: Publish consistent website feed
+        run: python publish_feed.py
+      - name: Save online database and feed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/results.sqlite3 data/results.json data/status.json data/feed.json
+          git diff --cached --quiet || (git commit -m 'Update verified lottery results' && git push)
+      - name: Keep source responses for audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-responses-${{ github.run_id }}
+          path: data/raw/
+          if-no-files-found: ignore
+          retention-days: 30
