@@ -1,0 +1,18 @@
+name: Check source connectivity
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/check-source.yml']
+permissions:
+  contents: read
+jobs:
+  network:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: DNS and HTTPS reachability
+        run: |
+          getent ahosts lutrija.rs || true
+          curl -4 -I --connect-timeout 8 --max-time 15 https://lutrija.rs/rezultati || true
+          curl -6 -I --connect-timeout 8 --max-time 15 https://lutrija.rs/rezultati || true
+          curl -4 -I --connect-timeout 8 --max-time 15 https://www.lutrija.rs/rezultati || true
