@@ -7,12 +7,25 @@ permissions:
   contents: read
 jobs:
   network:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 3
     steps:
-      - name: DNS and HTTPS reachability
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check official source
+        shell: python
         run: |
-          getent ahosts lutrija.rs || true
-          curl -4 -I --connect-timeout 8 --max-time 15 https://lutrija.rs/rezultati || true
-          curl -6 -I --connect-timeout 8 --max-time 15 https://lutrija.rs/rezultati || true
-          curl -4 -I --connect-timeout 8 --max-time 15 https://www.lutrija.rs/rezultati || true
+          import urllib.request, json, datetime
+          end = datetime.date.today()
+          body = json.dumps({"game":"loto","startDate":str(end-datetime.timedelta(days=7)),"endDate":str(end),"page":1,"pageSize":10,"lang":"sr-Latn-RS"}).encode()
+          request = urllib.request.Request("https://lutrija.rs/api/results", data=body, headers={"Content-Type":"application/json","Accept":"application/json","User-Agent":"RezultatiArchive/1.0","Referer":"https://lutrija.rs/rezultati"})
+          with urllib.request.urlopen(request, timeout=20) as response:
+              payload = response.read()
+              print("HTTP", response.status, "bytes", len(payload))
+              parsed = json.loads(payload)
+              print("Response fields:", list(parsed)[:10])
