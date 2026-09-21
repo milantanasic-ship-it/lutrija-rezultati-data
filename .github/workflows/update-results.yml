@@ -6,12 +6,6 @@ on:
         description: Check the past six months
         type: boolean
         default: false
-  push:
-    branches: [main]
-    paths: ['*.py', 'tests/**', '.github/workflows/update-results.yml']
-  schedule:
-    - cron: '0 22 * * *'
-      timezone: Europe/Belgrade
 permissions:
   contents: write
 concurrency:
